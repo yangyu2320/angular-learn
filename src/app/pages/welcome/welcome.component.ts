@@ -52,7 +52,7 @@ export class WelcomeComponent implements OnInit {
     let index = this.findTab(tab);
     WelcomeComponent.tabs.splice(this.findTab(tab), 1);
     RouterCacheService.deleteHandle(tab.routerLink);
-    if (index == this.activeTabIndex) {
+    if (index == this.activeTabIndex+1) {
       if (WelcomeComponent.tabs.length <= index) {
         index--;
       }
