@@ -1,11 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
+import {RouterCacheService, Tab} from '../../router/router-cache.service';
+import {filter, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-welcome',
   template: `
-      <nz-tabset nzSize="small" [nzType]="'card'" [nzSelectedIndex]="activeTabIndex">
-          <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+      <nz-tabset nzSize="small" [nzType]="'card'" [nzSelectedIndex]="getActiveTab()">
+          <nz-tab *ngIf="fixedTab" [nzTitle]="titleTemplate" (nzClick)="changeTab(fixedTab)">
+              <ng-template #titleTemplate>
+                  <div>{{ fixedTab.title }}<i *ngIf="fixedTab.closeable" nz-icon nzType="close" class="ant-tabs-close-x"
+                                              (click)="closeTab(fixedTab)"></i>
+                  </div>
+              </ng-template>
+          </nz-tab>
+          <nz-tab *ngFor="let tab of myTabs" [nzTitle]="titleTemplate" (nzClick)="changeTab(tab)">
               <ng-template #titleTemplate>
                   <div>{{ tab.title }}<i *ngIf="tab.closeable" nz-icon nzType="close" class="ant-tabs-close-x" (click)="closeTab(tab)"></i>
                   </div>
@@ -24,51 +33,59 @@ import {Router} from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
-  activeTabIndex = 0;
+  private activeTabIndex = 0;
 
-  tabs: Array<Tab> = [];
+  public fixedTab = new Tab('首页', '', false);
 
-  constructor(public router: Router) {
+  public static tabs: Array<Tab> = [];
+
+  public myTabs: Array<Tab> = [];
+
+  constructor(private routerCacheService: RouterCacheService, public router: Router) {
   }
 
   ngOnInit() {
-    const tab = new Tab('欢迎');
-    tab.closeable = false;
-    this.tabs.push(tab);
+    this.myTabs = WelcomeComponent.tabs;
   }
 
   closeTab(tab: Tab) {
-    this.tabs.splice(this.findTab(tab), 1);
+    let index = this.findTab(tab);
+    WelcomeComponent.tabs.splice(this.findTab(tab), 1);
+    RouterCacheService.deleteHandle(tab.routerLink);
+    if (index == this.activeTabIndex) {
+      if (WelcomeComponent.tabs.length <= index) {
+        index--;
+      }
+      this.changeTab(WelcomeComponent.tabs[index]);
+    }
   }
 
-  newTab(title: string): void {
-    let tab = new Tab(title);
+  newTab(tab: Tab): void {
     let index = this.findTab(tab);
     if (index < 0) {
-      index = this.tabs.push(tab);
+      index = WelcomeComponent.tabs.push(tab);
     }
-    this.activeTabIndex = index;
+    this.activeTabIndex = index + 1;
   }
 
   findTab(tab: Tab): number {
     if (tab && tab.title) {
-      for (let i = 0; i < this.tabs.length; i++) {
-        if (tab.title == this.tabs[i].title) {
+      for (let i = 0; i < WelcomeComponent.tabs.length; i++) {
+        if (tab.title == WelcomeComponent.tabs[i].title) {
           return i;
         }
       }
     }
     return -1;
   }
-}
 
-export class Tab {
+  changeTab(tab: Tab) {
+    this.activeTabIndex = this.findTab(tab) + 1;
+    console.log(tab.routerLink);
+    this.router.navigateByUrl(tab.routerLink);
+  }
 
-  public closeable: boolean = true;
-
-  public title: string;
-
-  constructor(title: string) {
-    this.title = title;
+  getActiveTab(): number {
+    return this.activeTabIndex;
   }
 }

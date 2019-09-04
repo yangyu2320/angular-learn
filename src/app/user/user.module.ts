@@ -6,7 +6,7 @@ import {FormsModule} from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'user', component: UserListComponent },
+  { path: 'user', component: UserListComponent},
   { path: 'user/:id', component: UserDetailComponent}
 ];
 
@@ -16,8 +16,6 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes)
-  ],
-  exports:[RouterModule],
-  providers: [UserListComponent, UserDetailComponent]
+  ]
 })
 export class UserModule { }

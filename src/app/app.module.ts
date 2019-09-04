@@ -13,6 +13,8 @@ import zh from '@angular/common/locales/zh';
 import {WelcomeModule} from './pages/welcome/welcome.module';
 import {UserListComponent} from './user/user-list/user-list.component';
 import {UserModule} from './user/user.module';
+import {RouteReuseStrategy} from '@angular/router';
+import {CachedRouteReuseStrategy} from './router/cached-route-reuse-strategy';
 
 registerLocaleData(zh);
 
@@ -31,7 +33,8 @@ registerLocaleData(zh);
     WelcomeModule,
     UserModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },
+    {provide: RouteReuseStrategy, useClass: CachedRouteReuseStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

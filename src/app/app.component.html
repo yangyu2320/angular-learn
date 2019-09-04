@@ -15,21 +15,8 @@
     <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzTitle="仪表盘" nzIcon="dashboard">
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a (click)="openUI('/welcome', '欢迎')">欢迎</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a (click)="openUI('/monitor', '监视器')">监视器</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a (click)="openUI('/workplace', '工作空间')">工作空间</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzTitle="表单" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a (click)="openUI('/basicForm', '基础表单')">基础表单</a>
+          <li *ngFor="let tab of tabs" nz-menu-item nzMatchRouter>
+            <a (click)="openUI(tab)">{{tab.title}}</a>
           </li>
         </ul>
       </li>
@@ -48,9 +35,9 @@
     </nz-header>
     <nz-content>
       <app-welcome></app-welcome>
-<!--      <div class="inner-content">-->
+      <div class="inner-content">
         <router-outlet></router-outlet>
-<!--      </div>-->
+      </div>
     </nz-content>
   </nz-layout>
 </nz-layout>
