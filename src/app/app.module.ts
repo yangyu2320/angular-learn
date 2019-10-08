@@ -11,7 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {WelcomeModule} from './pages/welcome/welcome.module';
-import {UserListComponent} from './user/user-list/user-list.component';
 import {UserModule} from './user/user.module';
 import {RouteReuseStrategy} from '@angular/router';
 import {CachedRouteReuseStrategy} from './router/cached-route-reuse-strategy';
