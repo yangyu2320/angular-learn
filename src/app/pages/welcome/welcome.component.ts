@@ -1,20 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {RouterCacheService, Tab} from '../../router/router-cache.service';
-import {filter, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-welcome',
   template: `
-      <nz-tabset nzSize="small" [nzType]="'card'" [nzSelectedIndex]="getActiveTab()">
-          <nz-tab *ngIf="fixedTab" [nzTitle]="titleTemplate" (nzClick)="changeTab(fixedTab)">
-              <ng-template #titleTemplate>
-                  <div>{{ fixedTab.title }}<i *ngIf="fixedTab.closeable" nz-icon nzType="close" class="ant-tabs-close-x"
-                                              (click)="closeTab(fixedTab)"></i>
-                  </div>
-              </ng-template>
-          </nz-tab>
-          <nz-tab *ngFor="let tab of myTabs" [nzTitle]="titleTemplate" (nzClick)="changeTab(tab)">
+      <nz-tabset nzSize="small" [nzType]="'card'" [nzSelectedIndex]="getActiveTabIndex()">
+          <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate" (nzClick)="changeTab(tab)">
               <ng-template #titleTemplate>
                   <div>{{ tab.title }}<i *ngIf="tab.closeable" nz-icon nzType="close" class="ant-tabs-close-x" (click)="closeTab(tab)"></i>
                   </div>
@@ -33,45 +25,77 @@ import {filter, map, mergeMap} from 'rxjs/operators';
 })
 export class WelcomeComponent implements OnInit {
 
-  private activeTabIndex = 0;
+  public static instance: WelcomeComponent;
 
-  public fixedTab = new Tab('首页', '', false);
+  /**
+   * 激活的Tab
+   */
+  private activeTab: Tab;
 
-  public static tabs: Array<Tab> = [];
-
-  public myTabs: Array<Tab> = [];
+  /**
+   * 所有Tab
+   */
+  public tabs: Array<Tab> = [new Tab('首页', '', false)];
 
   constructor(private routerCacheService: RouterCacheService, public router: Router) {
   }
 
   ngOnInit() {
-    this.myTabs = WelcomeComponent.tabs;
+    WelcomeComponent.instance = this;
   }
 
-  closeTab(tab: Tab) {
-    let index = this.findTab(tab);
-    WelcomeComponent.tabs.splice(this.findTab(tab), 1);
-    RouterCacheService.deleteHandle(tab.routerLink);
-    if (index == this.activeTabIndex) {
-      if (WelcomeComponent.tabs.length <= index) {
-        index--;
-      }
-      this.changeTab(WelcomeComponent.tabs[index]);
-    }
-  }
-
+  /**
+   * 新增Tab
+   * @param tab
+   */
   newTab(tab: Tab): void {
     let index = this.findTab(tab);
     if (index < 0) {
-      index = WelcomeComponent.tabs.push(tab);
+      this.tabs.push(tab);
     }
-    this.activeTabIndex = index + 1;
+    this.activeTab = tab;
   }
 
+  /**
+   * 关闭Tab
+   * @param tab
+   */
+  closeTab(tab: Tab) {
+    let index = this.findTab(tab);
+    this.tabs.splice(index, 1);
+    RouterCacheService.deleteHandle(tab.routerLink);
+    if (tab == this.activeTab) {
+      if (this.tabs.length <= index) {
+        index--;
+      }
+      this.changeTab(this.tabs[index]);
+    }
+  }
+
+  /**
+   * 切换Tab
+   * @param tab
+   */
+  changeTab(tab: Tab) {
+    this.activeTab = tab;
+    this.router.navigateByUrl(tab.routerLink);
+  }
+
+  /**
+   * 获取激活Tab对应序号
+   */
+  getActiveTabIndex(): number {
+    return this.findTab(this.activeTab);
+  }
+
+  /**
+   * 获取指定Tab对应序号
+   * @param tab
+   */
   findTab(tab: Tab): number {
     if (tab && tab.title) {
-      for (let i = 0; i < WelcomeComponent.tabs.length; i++) {
-        if (tab.title == WelcomeComponent.tabs[i].title) {
+      for (let i = 0; i < this.tabs.length; i++) {
+        if (tab.title == this.tabs[i].title) {
           return i;
         }
       }
@@ -79,13 +103,16 @@ export class WelcomeComponent implements OnInit {
     return -1;
   }
 
-  changeTab(tab: Tab) {
-    this.activeTabIndex = this.findTab(tab) + 1;
-    console.log(tab.routerLink);
-    this.router.navigateByUrl(tab.routerLink);
-  }
-
-  getActiveTab(): number {
-    return this.activeTabIndex;
+  /**
+   * 是否存在Url对应Tab
+   * @param url
+   */
+  hasUrlTab(url: string): boolean {
+    for (let i = 0; i < this.tabs.length; i++) {
+      if (url == this.tabs[i].title) {
+        return true;
+      }
+    }
+    return false;
   }
 }

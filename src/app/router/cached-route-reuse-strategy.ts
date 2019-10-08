@@ -2,6 +2,11 @@ import {ActivatedRouteSnapshot, DetachedRouteHandle, Route, RouteReuseStrategy} 
 import {RouterCacheService} from './router-cache.service';
 import {WelcomeComponent} from '../pages/welcome/welcome.component';
 
+/**
+ * 路由复用策略
+ *    标签页路由缓存
+ * @author yangyu
+ */
 export class CachedRouteReuseStrategy extends RouteReuseStrategy {
 
   /**
@@ -49,7 +54,7 @@ export class CachedRouteReuseStrategy extends RouteReuseStrategy {
       RouterCacheService.deleteHandle(routerLink);
       return;
     }
-    if (WelcomeComponent.tabs.filter(router => router.routerLink == routerLink).length <= 0) {
+    if (WelcomeComponent.instance.hasUrlTab(routerLink)) {
       return;
     }
     RouterCacheService.putHandle(routerLink, handle);
