@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {OrderListComponent} from './order-list/order-list.component';
 import {RouterModule, Routes} from '@angular/router';
 import {OrderDetailComponent} from './order-detail/order-detail.component';
+import {NzButtonModule, NzTableModule} from 'ng-zorro-antd';
 
 const routes: Routes = [
   {path: 'order', component: OrderListComponent},
@@ -13,7 +14,9 @@ const routes: Routes = [
   declarations: [OrderListComponent, OrderDetailComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NzTableModule,
+    NzButtonModule
   ]
 })
 export class OrderModule {
