@@ -1,12 +1,14 @@
 import {ActivatedRouteSnapshot, DetachedRouteHandle, Route, RouteReuseStrategy} from '@angular/router';
 import {RouterCacheService} from './router-cache.service';
 import {WelcomeComponent} from '../pages/welcome/welcome.component';
+import { Injectable } from "@angular/core";
 
 /**
  * 路由复用策略
  *    标签页路由缓存
  * @author yangyu
  */
+@Injectable()
 export class CachedRouteReuseStrategy extends RouteReuseStrategy {
 
   /**
