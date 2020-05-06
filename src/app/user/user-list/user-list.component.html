@@ -1,3 +1,24 @@
-<div>
-  <input type="text" style="background-color: yellow" name="username" [(ngModel)]="test" />
-</div>
+<nz-table #userTable nzSize="small" [nzData]="listOfData" [nzScroll]="{ x: '1100px' }">
+  <thead>
+  <tr>
+    <th nzLeft>Action</th>
+    <th nzLeft>ID</th>
+    <th nzLeft>姓名</th>
+    <th>性别</th>
+    <th>手机</th>
+    <th>电子邮箱</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of userTable.data">
+    <td nzLeft>
+      <a>编辑</a>
+    </td>
+    <td nzLeft>{{ user.id }}</td>
+    <td nzLeft>{{ user.name }}</td>
+    <td>{{ user.gender }}</td>
+    <td>{{ user.mobile }}</td>
+    <td>{{ user.email }}</td>
+  </tr>
+  </tbody>
+</nz-table>

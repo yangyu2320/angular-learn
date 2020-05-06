@@ -6,8 +6,8 @@ import {OrderDetailComponent} from './order-detail/order-detail.component';
 import {NzButtonModule, NzTableModule} from 'ng-zorro-antd';
 
 const routes: Routes = [
-  {path: 'order', component: OrderListComponent},
-  {path: 'order/:id', component: OrderDetailComponent}
+  {path: '', component: OrderListComponent},
+  {path: ':id', component: OrderDetailComponent}
 ];
 
 @NgModule({

@@ -13,7 +13,7 @@
       </a>
     </div>
     <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzTitle="仪表盘" nzIcon="dashboard">
+      <li nz-submenu nzTitle="基础信息" nzIcon="dashboard">
         <ul>
           <li *ngFor="let tab of tabs" nz-menu-item nzMatchRouter>
             <a (click)="openUI(tab)">{{tab.title}}</a>

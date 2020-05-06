@@ -11,10 +11,10 @@ export class RouterCacheService {
   private static handles: { [key: string]: DetachedRouteHandle } = {};
 
   constructor() {
-    this.tabs.push(new Tab('用户列表', '/user/user', true));
-    this.tabs.push(new Tab('用户详情', '/user/user/123', true));
-    this.tabs.push(new Tab('合同列表', '/order/order', true));
-    this.tabs.push(new Tab('合同详情', '/order/order/123', true));
+    this.tabs.push(new Tab('用户列表', '/user', true));
+    this.tabs.push(new Tab('用户详情', '/user/123', true));
+    this.tabs.push(new Tab('合同列表', '/order', true));
+    this.tabs.push(new Tab('合同详情', '/order/123', true));
   }
 
   getRouterCaches(): Array<Tab> {
