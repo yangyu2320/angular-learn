@@ -15,7 +15,7 @@ import {RouterCacheService, Tab} from '../../router/router-cache.service';
       </nz-tabset>
   `,
   styles: [`.ant-tabs-bar {
-      margin: 0 0px 0 0px;
+      margin: 0;
   }
 
   .ant-tabs {

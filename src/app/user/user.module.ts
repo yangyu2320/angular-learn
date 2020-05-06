@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {UserListComponent} from './user-list/user-list.component';
+import {UserDetailComponent} from './user-detail/user-detail.component';
 import {FormsModule} from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 
 const routes: Routes = [
-  { path: 'user', component: UserListComponent},
-  { path: 'user/:id', component: UserDetailComponent}
+  {path: 'user', component: UserListComponent},
+  {path: 'user/:id', component: UserDetailComponent}
 ];
 
 @NgModule({
@@ -18,4 +18,5 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ]
 })
-export class UserModule { }
+export class UserModule {
+}
