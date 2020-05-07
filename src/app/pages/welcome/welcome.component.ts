@@ -63,12 +63,18 @@ export class WelcomeComponent implements OnInit {
   closeTab(tab: Tab) {
     let index = this.findTab(tab);
     this.tabs.splice(index, 1);
-    RouterCacheService.deleteHandle(tab.routerLink);
     if (tab == this.activeTab) {
       if (this.tabs.length <= index) {
         index--;
       }
-      this.changeTab(this.tabs[index]);
+      this.router.navigateByUrl(this.tabs[index].routerLink, { skipLocationChange: true}).then(success => {
+        if (success) {
+          this.activeTab = tab;
+          RouterCacheService.deleteHandle(tab.routerLink);
+        }
+      })
+    } else {
+      RouterCacheService.deleteHandle(tab.routerLink);
     }
   }
 
@@ -77,8 +83,11 @@ export class WelcomeComponent implements OnInit {
    * @param tab
    */
   changeTab(tab: Tab) {
-    this.activeTab = tab;
-    this.router.navigateByUrl(tab.routerLink);
+    this.router.navigateByUrl(tab.routerLink, { skipLocationChange: true}).then(success => {
+      if (success) {
+        this.activeTab = tab;
+      }
+    });
   }
 
   /**

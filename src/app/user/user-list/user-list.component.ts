@@ -11,12 +11,11 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService) {
   }
 
-  listOfData: User[] = new Array<User>();
+  users: User[];
 
   ngOnInit(): void {
-    let users = this.userService.getUsers();
-    users.forEach(user => {
-      this.listOfData.push(user);
+    this.userService.getUsers().subscribe((users) => {
+      this.users = users;
     });
   }
 }

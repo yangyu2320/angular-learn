@@ -30,7 +30,8 @@ export class CachedRouteReuseStrategy extends RouteReuseStrategy {
   }
 
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    return true;
+    return !(route.routeConfig && route.routeConfig.loadChildren);
+
   }
 
   /**
@@ -48,17 +49,7 @@ export class CachedRouteReuseStrategy extends RouteReuseStrategy {
    * @param handle
    */
   store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle | null): void {
-    if (route.routeConfig && route.routeConfig.loadChildren) {
-      return;
-    }
     const routerLink = route['_routerState']['url'];
-    if (!handle) {
-      RouterCacheService.deleteHandle(routerLink);
-      return;
-    }
-    if (WelcomeComponent.instance.hasUrlTab(routerLink)) {
-      return;
-    }
     RouterCacheService.putHandle(routerLink, handle);
   }
 }

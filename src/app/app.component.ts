@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   openUI(tab: Tab) {
     this.welcomeComponent.newTab(tab);
     console.log(tab.routerLink);
-    this.router.navigateByUrl(tab.routerLink);
+    this.router.navigateByUrl(tab.routerLink, {skipLocationChange: true});
   }
 
   ngOnInit(): void {
