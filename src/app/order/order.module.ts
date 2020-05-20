@@ -4,6 +4,13 @@ import {OrderListComponent} from './order-list/order-list.component';
 import {RouterModule, Routes} from '@angular/router';
 import {OrderDetailComponent} from './order-detail/order-detail.component';
 import {NzButtonModule, NzTableModule} from 'ng-zorro-antd';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatIconModule} from '@angular/material/icon';
+import {MatRadioModule} from '@angular/material/radio';
 
 const routes: Routes = [
   {path: 'list', component: OrderListComponent},
@@ -16,7 +23,14 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     NzTableModule,
-    NzButtonModule
+    NzButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatRadioModule
   ]
 })
 export class OrderModule {

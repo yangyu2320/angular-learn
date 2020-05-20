@@ -1,0 +1,14 @@
+.record-table .form-title {
+  font-weight: normal;
+  color: black;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px 400px
+}

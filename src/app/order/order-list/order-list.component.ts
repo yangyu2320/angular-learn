@@ -18,9 +18,10 @@ export interface VirtualDataInterface {
       [nzVirtualItemSize]="38"
       [nzData]="listOfData"
       [nzVirtualForTrackBy]="trackByIndex"
-      [nzFrontPagination]="true"
-      [nzShowPagination]="true"
-      [nzScroll]="{ x: '1200px', y: '400px' }"
+      [nzFrontPagination]="false"
+      [nzShowPagination]="false"
+      [nzScroll]="{ x: '1000px', y: '400px' }"
+      nzBordered="true"
       nzSize="small"
     >
       <thead>
@@ -53,7 +54,7 @@ export interface VirtualDataInterface {
           <td>{{ data.address }}</td>
           <td>{{ data.address }}</td>
           <td>{{ data.address }}</td>
-          <td nzRight>
+          <td>
             <a>action</a>
           </td>
         </tr>

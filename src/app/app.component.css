@@ -1,3 +1,7 @@
+@use "@material/textfield";
+
+@include textfield.core-styles;
+
 :host {
   display: flex;
   text-rendering: optimizeLegibility;
@@ -71,12 +75,17 @@ nz-header {
 
 nz-content {
   margin: 0px 0px 0px 0px;
+  position: relative;
 }
 
 .inner-content {
-  padding: 24px;
+  padding: 0 10px;
   background: #fff;
-  height: 100%;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .ant-layout-header {

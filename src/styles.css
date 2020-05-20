@@ -1,2 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.example-full-width {
+  padding: 0 5px;
+}
+
+.record-table .mat-form-field-appearance-outline {
+  line-height: 1;
+  font-weight: normal;
+}
+
+.record-table .mat-form-field-appearance-outline .mat-form-field-flex {
+  margin-top: 0!important;
+  padding: 0 0.5em;
+}
+
+.record-table .mat-form-field-appearance-outline .mat-form-field-infix {
+  border-top: 0;
+  padding: .5em 0;
+}
+
+.record-table .mat-form-field-appearance-outline .mat-form-field-infix .mat-input-element{
+  margin-top: 0
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  top: 0!important;
+}
+
+.record-table .mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.record-table .mat-form-field-appearance-outline input{
+  vertical-align: middle;
+  color: black;
+}
+
+.record-table {
+  border-collapse: separate;
+  border-spacing: 5px;
+}
