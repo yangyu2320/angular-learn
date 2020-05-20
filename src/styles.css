@@ -17,7 +17,7 @@
 
 .record-table .mat-form-field-appearance-outline .mat-form-field-infix {
   border-top: 0;
-  padding: .5em 0;
+  padding: .4em 0;
 }
 
 .record-table .mat-form-field-appearance-outline .mat-form-field-infix .mat-input-element{
@@ -41,4 +41,46 @@
 .record-table {
   border-collapse: separate;
   border-spacing: 5px;
+  font-size: 12px;
+}
+
+.record-table .mat-radio-outer-circle {
+  width: 14px;
+  height: 14px;
+}
+
+.record-table .mat-radio-inner-circle {
+  width: 14px;
+  height: 14px;
+}
+
+.record-table .mat-radio-button .mat-radio-ripple {
+  left: calc(50% - 14px);
+  top: calc(50% - 14px);
+  height: 28px;
+  width: 28px;
+}
+
+.record-table .mat-radio-container {
+  height: 14px;
+  width: 14px;
+}
+
+.record-table .mat-form-field .mat-form-field-prefix, .record-table .mat-form-field .mat-form-field-suffix {
+  padding: .4em 0;
+}
+
+.record-table .mat-form-field .mat-form-field-prefix .mat-datepicker-toggle-default-icon, .record-table .mat-form-field .mat-form-field-suffix .mat-datepicker-toggle-default-icon {
+  width: 1em!important;
+  height: 1em!important;
+}
+
+.record-table .mat-form-field .mat-form-field-prefix .mat-icon-button, .record-table .mat-form-field .mat-form-field-suffix .mat-icon-button {
+  width: 1em!important;
+  height: 1em!important;
+}
+
+.record-table .mat-form-field .mat-form-field-infix {
+  width: auto;
+  vertical-align: middle;
 }

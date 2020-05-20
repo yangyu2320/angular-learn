@@ -1,6 +1,9 @@
 .record-table .form-title {
   font-weight: normal;
   color: black;
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 2px;
 }
 
 .mat-radio-button ~ .mat-radio-button {
